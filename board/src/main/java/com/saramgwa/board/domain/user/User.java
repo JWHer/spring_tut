@@ -26,8 +26,8 @@ public class User {
     @Column(length = 255, nullable = false)
     private String password;
 
-    // @Column(columnDefinition = 'TEXT', nullable = false)
-    // private String content;
+    @Column(length = 64, nullable = false)
+    private String role;
 
     @Builder
     public User(String username, String password) {
@@ -35,7 +35,8 @@ public class User {
         this.password = password;
     }
 
-    public void update(String password){
+    public void update(String password, String role){
         this.password = password;
+        this.role = role;
     }
 }

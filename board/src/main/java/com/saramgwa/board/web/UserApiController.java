@@ -14,37 +14,39 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
 
 @RequiredArgsConstructor
 @RestController
+@RequestMapping("/api/v1")
 public class UserApiController {
-    private static final String API_VERSION_STRING = "/api/v1";
+    // private static final String API_VERSION_STRING = "/api/v1";
     private final UserService userService;
 
-    @GetMapping("/api/v1/users")
-    public List<User> userList() {
-        return userService.getAll(); 
+    @GetMapping("/users")
+    public List<User> readAll() {
+        return userService.readAll(); 
     }
 
-    @GetMapping("/api/v1/user/{id}")
-    public UserResponseDto user(@PathVariable Long id) {
-        return userService.get(id);
+    @GetMapping("/users/{id}")
+    public UserResponseDto read(@PathVariable Long id) {
+        return userService.read(id);
     }
 
-    @PostMapping("/api/v1/user")
-    public UserResponseDto save(@RequestBody UserSaveRequestDto requestDto){
-        return userService.save(requestDto);
+    @PostMapping("/users")
+    public UserResponseDto create(@RequestBody UserSaveRequestDto requestDto){
+        return userService.create(requestDto);
     }
 
-    @PutMapping(API_VERSION_STRING+"/user/{id}")
+    @PutMapping("/users/{id}")
     public UserResponseDto update(@PathVariable Long id, @RequestBody UserUpdateRequestDto requestDto){
         return userService.update(id, requestDto);
     }
 
-    @DeleteMapping(API_VERSION_STRING+"/user/{id}")
+    @DeleteMapping("/users/{id}")
     public UserResponseDto delete(@PathVariable Long id){
         return userService.delete(id);
     }

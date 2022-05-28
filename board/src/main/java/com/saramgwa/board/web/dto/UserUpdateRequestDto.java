@@ -8,8 +8,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserUpdateRequestDto {
     private String password;
+    private String role;
     @Builder
-    public UserUpdateRequestDto(String password){
+    public UserUpdateRequestDto(String password, String role){
         this.password = password;
+        this.role = role;
     }
 }

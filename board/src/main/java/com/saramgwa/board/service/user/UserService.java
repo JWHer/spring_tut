@@ -16,23 +16,24 @@ import com.saramgwa.board.web.dto.UserUpdateRequestDto;
 @RequiredArgsConstructor
 @Service
 public class UserService {
+    private static final String ILLEGAL_ARG_EXCP = "There is no such user id: ";
     private final UserRepository userRepository;
 
     @Transactional
-    public List<User> getAll(){
+    public List<User> readAll(){
         return userRepository.findAll();
     }
 
     @Transactional
-    public UserResponseDto get(Long id){
+    public UserResponseDto read(Long id){
         User entity = userRepository.findById(id).orElseThrow(
-            ()-> new IllegalArgumentException("해당 사용자가 없습니다. id: "+id)
+            ()-> new IllegalArgumentException(ILLEGAL_ARG_EXCP+id)
         );
         return new UserResponseDto(entity);
     }
 
     @Transactional
-    public UserResponseDto save(UserSaveRequestDto requestDto){
+    public UserResponseDto create(UserSaveRequestDto requestDto){
         User entity = userRepository.save(requestDto.toEntity());
         return new UserResponseDto(entity);
     }
@@ -40,9 +41,9 @@ public class UserService {
     @Transactional
     public UserResponseDto update(Long id, UserUpdateRequestDto requestDto){
         User entity = userRepository.findById(id).orElseThrow(
-            () -> new IllegalArgumentException("해당 사용자가 없습니다. id: "+id)
+            () -> new IllegalArgumentException(ILLEGAL_ARG_EXCP+id)
         );
-        entity.update(requestDto.getPassword());
+        entity.update(requestDto.getPassword(), requestDto.getRole());
 
         return new UserResponseDto(entity);
     }
@@ -50,7 +51,7 @@ public class UserService {
     @Transactional
     public UserResponseDto delete(Long id){
         User entity = userRepository.findById(id).orElseThrow(
-            () -> new IllegalArgumentException("해당 사용자가 없습니다. id: "+id)
+            () -> new IllegalArgumentException(ILLEGAL_ARG_EXCP+id)
         );
         userRepository.delete(entity);
         return new UserResponseDto(entity);
