@@ -29,9 +29,10 @@ repositories {
 }
 
 dependencies {
+	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+	implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
 	implementation 'org.springframework.boot:spring-boot-starter-web'
 	implementation 'org.springframework.boot:spring-boot-starter-webflux'
-	implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
 	implementation 'io.springfox:springfox-boot-starter:3.0.0'
 	runtimeOnly 'org.xerial:sqlite-jdbc:3.34.0'
 
