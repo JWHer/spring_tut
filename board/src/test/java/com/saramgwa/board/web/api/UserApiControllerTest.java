@@ -1,4 +1,4 @@
-package com.saramgwa.board.web;
+package com.saramgwa.board.web.api;
 
 
 import com.saramgwa.board.domain.user.Role;

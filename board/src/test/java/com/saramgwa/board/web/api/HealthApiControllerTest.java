@@ -1,4 +1,4 @@
-package com.saramgwa.board.web;
+package com.saramgwa.board.web.api;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -13,8 +13,8 @@ import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(controllers = HomeController.class)
-public class HomeControllerTest {
+@WebMvcTest(controllers = HealthApiController.class)
+public class HealthApiControllerTest {
     @Autowired
     private MockMvc mvc;
 

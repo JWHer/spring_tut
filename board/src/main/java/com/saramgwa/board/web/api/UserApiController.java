@@ -1,4 +1,4 @@
-package com.saramgwa.board.web;
+package com.saramgwa.board.web.api;
 
 import java.util.List;
 
@@ -20,6 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import lombok.RequiredArgsConstructor;
+import springfox.documentation.annotations.ApiIgnore;
 
 @RequiredArgsConstructor
 @RestController
@@ -39,7 +40,7 @@ public class UserApiController {
     }
 
     @GetMapping("/users/me")
-    public UserResponseDto readMe(@LoginUser SessionUser sessionUser){
+    public UserResponseDto readMe(@ApiIgnore @LoginUser SessionUser sessionUser){
         return userService.read(sessionUser.getId());
     }
 
