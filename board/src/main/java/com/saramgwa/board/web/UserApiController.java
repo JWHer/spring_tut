@@ -2,11 +2,13 @@ package com.saramgwa.board.web;
 
 import java.util.List;
 
+import com.saramgwa.board.config.auth.LoginUser;
+import com.saramgwa.board.config.auth.SessionUser;
 import com.saramgwa.board.domain.user.User;
-import com.saramgwa.board.service.user.UserService;
-import com.saramgwa.board.web.dto.UserResponseDto;
-import com.saramgwa.board.web.dto.UserSaveRequestDto;
-import com.saramgwa.board.web.dto.UserUpdateRequestDto;
+import com.saramgwa.board.service.UserService;
+import com.saramgwa.board.web.dto.User.UserCreateRequestDto;
+import com.saramgwa.board.web.dto.User.UserResponseDto;
+import com.saramgwa.board.web.dto.User.UserUpdateRequestDto;
 
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -36,8 +38,13 @@ public class UserApiController {
         return userService.read(id);
     }
 
+    @GetMapping("/users/me")
+    public UserResponseDto readMe(@LoginUser SessionUser sessionUser){
+        return userService.read(sessionUser.getId());
+    }
+
     @PostMapping("/users")
-    public UserResponseDto create(@RequestBody UserSaveRequestDto requestDto){
+    public UserResponseDto create(@RequestBody UserCreateRequestDto requestDto){
         return userService.create(requestDto);
     }
 

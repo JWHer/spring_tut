@@ -1,4 +1,4 @@
-package com.saramgwa.board.service.user;
+package com.saramgwa.board.service;
 
 import java.util.List;
 
@@ -9,9 +9,9 @@ import org.springframework.transaction.annotation.Transactional;
 
 import com.saramgwa.board.domain.user.User;
 import com.saramgwa.board.domain.user.UserRepository;
-import com.saramgwa.board.web.dto.UserResponseDto;
-import com.saramgwa.board.web.dto.UserSaveRequestDto;
-import com.saramgwa.board.web.dto.UserUpdateRequestDto;
+import com.saramgwa.board.web.dto.User.UserCreateRequestDto;
+import com.saramgwa.board.web.dto.User.UserResponseDto;
+import com.saramgwa.board.web.dto.User.UserUpdateRequestDto;
 
 @RequiredArgsConstructor
 @Service
@@ -33,7 +33,7 @@ public class UserService {
     }
 
     @Transactional
-    public UserResponseDto create(UserSaveRequestDto requestDto){
+    public UserResponseDto create(UserCreateRequestDto requestDto){
         User entity = userRepository.save(requestDto.toEntity());
         return new UserResponseDto(entity);
     }

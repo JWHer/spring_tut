@@ -1,4 +1,6 @@
-package com.saramgwa.board.web.dto;
+package com.saramgwa.board.web.dto.User;
+
+import com.saramgwa.board.domain.user.Role;
 
 import lombok.Builder;
 import lombok.Getter;
@@ -8,9 +10,10 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 public class UserUpdateRequestDto {
     private String password;
-    private String role;
+    private Role role;
+    
     @Builder
-    public UserUpdateRequestDto(String password, String role){
+    public UserUpdateRequestDto(String password, Role role){
         this.password = password;
         this.role = role;
     }
