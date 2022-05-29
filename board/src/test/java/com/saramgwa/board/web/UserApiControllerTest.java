@@ -1,11 +1,11 @@
 package com.saramgwa.board.web;
 
 
+import com.saramgwa.board.domain.user.Role;
 import com.saramgwa.board.domain.user.User;
 import com.saramgwa.board.domain.user.UserRepository;
-// import com.saramgwa.board.web.dto.UserResponseDto;
-import com.saramgwa.board.web.dto.UserSaveRequestDto;
-import com.saramgwa.board.web.dto.UserUpdateRequestDto;
+import com.saramgwa.board.web.dto.User.UserCreateRequestDto;
+import com.saramgwa.board.web.dto.User.UserUpdateRequestDto;
 
 import org.junit.After;
 import org.junit.Test;
@@ -45,9 +45,9 @@ public class UserApiControllerTest {
     public void createUser() throws Exception {
         String username = "test_username";
         String password = "test_password";
-        UserSaveRequestDto requestDto = UserSaveRequestDto.builder()
+        UserCreateRequestDto requestDto = UserCreateRequestDto.builder()
             .username(username).password(password).build();
-        String url = "http://localhost:"+port+"/api/v1/user";
+        String url = "http://localhost:"+port+"/api/v1/users";
 
         ResponseEntity<User> responseEntity
             = restTemplate.postForEntity(url, requestDto, User.class);
@@ -63,13 +63,13 @@ public class UserApiControllerTest {
     @Test
     public void updateUser() throws Exception {
         User savedUser = userRepository.save(
-            User.builder().username("org_name").password("org_pw").build()
+            User.builder().username("org_name").password("org_pw").role(Role.USER).build()
         );
 
         Long updateId = savedUser.getId();
         String password = "new_password";
-        UserUpdateRequestDto requestDto = UserUpdateRequestDto.builder().password(password).build();
-        String url = "http://localhost:"+port+"/api/v1/user/"+updateId;
+        UserUpdateRequestDto requestDto = UserUpdateRequestDto.builder().password(password).role(Role.ADMIN).build();
+        String url = "http://localhost:"+port+"/api/v1/users/"+updateId;
         HttpEntity<UserUpdateRequestDto> requestEntity = new HttpEntity<>(requestDto);
 
         ResponseEntity<User> responseEntity = restTemplate.exchange(

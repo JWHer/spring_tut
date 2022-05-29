@@ -28,7 +28,8 @@ public class UserRepositoryTest {
     public void testUserList(){
         String username = "test_username";
         String password = "test_password";
-        userRepository.save(User.builder().username(username).password(password).build());
+        // User cuser = User.builder().username(username).password(password).role(Role.USER.name()).build();
+        userRepository.save(User.builder().username(username).password(password).role(Role.USER).build());
 
         List<User> userList = userRepository.findAll();
 

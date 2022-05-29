@@ -21,7 +21,7 @@ public class HomeControllerTest {
     @Test
     public void testHealth() throws Exception {
         String health = "ok";
-        mvc.perform(get("/health"))
+        mvc.perform(get("/api/v1/health"))
             .andExpect(status().isOk())
             .andExpect(content().string(health));
     }
